@@ -1,0 +1,225 @@
+// Override Bootstrap's Sass default variables
+//
+// Nearly all variables in Bootstrap are written with the `!default` flag.
+// This allows you to override the default values of those variables before
+// you import Bootstrap's source Sass files.
+//
+// Overriding the default variable values is the best way to customize your
+// CSS without writing _new_ styles. For example, change you can either change
+// `$body-color` or write more CSS that override's Bootstrap's CSS like so:
+// `body { color: red; }`.
+
+
+//
+// Bring in Bootstrap
+//
+
+// Option 1
+//
+// Import all of Bootstrap's CSS
+
+// @import "bootstrap/scss/bootstrap";
+
+// Option 2
+//
+// Place variable overrides first, then import just the styles you need. Note that some stylesheets are required no matter what.
+
+// Toggle global options
+$enable-gradients: false;
+$enable-shadows: false;
+
+// Choice Brand Colours
+$blue:    #3EB0EF;
+$indigo:  #6610f2;
+$purple:  #6f42c1;
+$pink:    #ff0099;
+$red:     #ff0019;
+$orange:  #ffb86c;
+$yellow:  #d0ff00;
+$green:   #50FA78;
+$teal:    #00fff2;
+$cyan:    #8be9fd;
+
+$color_purple: #6666FF;
+$color_green: #50FA7B;
+$color_pink: #ff0099;
+$color_dark: #23263a;
+$color_light: #f7f9f9;
+
+// Light Colours
+$body-color: $color_dark;
+$body-bg: $color_light;
+$border-radius: .5rem;
+
+// scss-docs-start import-stack
+// Configuration
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "scss/_variables-alt.scss";  // dark color set is here
+@import "~bootstrap/scss/mixins";
+@import "scss/dark/mixins";
+@import "~bootstrap/scss/utilities";
+@import "scss/dark/utilities";
+@import "scss/dark/patch";  // missing from BS, unsupported patch/hack
+
+$custom-colors: (
+  "color_purple": $color_purple,
+  "color_green": $color_green,
+  "color_pink": $color_pink,
+  "color_dark": $color_dark,
+  "color_light": $color_light
+);
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+
+// Layout & components
+@import "scss/dark/color-scheme";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/accordion";
+@import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/progress";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/toasts";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap/scss/tooltip";
+@import "~bootstrap/scss/popover";
+@import "~bootstrap/scss/carousel";
+@import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/offcanvas";
+
+// Helper~bootstrap/scss/s
+@import "~bootstrap/scss/helpers";
+
+// Utilit~bootstrap/scss/ies
+@import "~bootstrap/scss/utilities/api";
+// scss-docs-end import-stack
+
+/*
+ * ---------- Dark Mode ------------------------------------------------------
+ */
+
+@include color-scheme-alt(alternative-color-scheme($default-color-scheme)) {
+
+  // stylelint-disable no-invalid-position-at-import-rule
+
+  // Toggle global options
+  $enable-gradients: false;
+  $enable-shadows: false;
+  $body-color: $color_light;
+  $body-bg: $color_dark;
+ 
+
+  // Layout & components
+  @import "scss/dark/root";
+  @import "scss/dark/reboot";
+
+  
+
+  @import "scss/dark/type";
+  @import "scss/dark/images";
+
+  // no colors in containers
+  // no colors in grid
+  @import "scss/dark/tables";
+  @import "scss/dark/forms";
+  @import "scss/dark/buttons";
+  // no colors in transitions
+  @import "scss/dark/dropdown";
+  @import "scss/dark/button-group";
+  @import "scss/dark/nav";
+  @import "scss/dark/navbar";
+  @import "scss/dark/card";
+  @import "scss/dark/accordion";
+  @import "scss/dark/breadcrumb";
+  @import "scss/dark/pagination";
+  @import "scss/dark/badge";
+  @import "scss/dark/alert";
+  @import "scss/dark/progress";
+  @import "scss/dark/list-group";
+  @import "scss/dark/close";
+  @import "scss/dark/toasts";
+  @import "scss/dark/modal";
+  @import "scss/dark/tooltip";
+  @import "scss/dark/popover";
+  @import "scss/dark/carousel";
+  // no colors in spinners
+  @import "scss/dark/offcanvas";
+
+  // Helpers
+  @import "scss/dark/helpers";
+    // Choice Brand Colours
+
+
+
+  // Utilities
+  @import "scss/dark/utilities/api";
+
+  // Unique to dark-mode
+  @import "scss/dark/dark";
+}
+
+// Additional Global Utilities
+@import "scss/dark/utilities/api-all";
+
+
+//
+// Custom styles
+//
+.navbar-brand {
+  max-width: 2rem;
+}
+
+.app_window {
+  grid-template-columns: 1fr 2fr;
+}
+
+
+
+
+
+@media (prefers-color-scheme: dark) {
+  body  { 
+    background:  $color_dark; 
+    color: $color_light; 
+  }
+
+  .svglogo_color {
+    fill: $color_light;
+  }
+
+}
+
+@media (prefers-color-scheme: light) {
+  body  { 
+     background:  $color_light; 
+     color: $color_dark; 
+  }
+   
+  .btn-primary {
+    color: #fff; 
+  }
+
+  .svglogo_color {
+    fill: $color_dark;    
+  }
+  
+}
+
